@@ -1,0 +1,8 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# App Api
+GET        /               api.AppApi.currentVersion
+GET        /version        api.AppApi.currentVersion
+GET        /ping           api.AppApi.ping
