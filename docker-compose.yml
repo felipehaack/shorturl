@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+
+  api-base:
+    build:
+      context: .
+      dockerfile: ./tools/Dockerfile-sbt
+    volumes:
+      - ./:/app
+      - ~/.sbt:/root/.sbt
+      - ~/.ivy2:/root/.ivy2
+      - ~/.m2:/root/.m2
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/shorturl
+
+  api:
+    extends: api-base
+    command: sbt "project payu-api" "run"
+    ports:
+      - "9000:9000"
+      - "9999:9999"
+    links:
+      - postgres
+    environment:
+      - SBT_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9999 -Dconfig.resource=application-prod.conf -Dfile.encoding=UTF-8 -Xms512m -Xmx1536m -Xss2m -XX:ReservedCodeCacheSize=256m -XX:+TieredCompilation -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC
+    stdin_open: true
+
+  postgres:
+    image: postgres:9.6-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=shorturl
+      - POSTGRES_USER=root
+
+  api-test:
+    extends: api-base
+    command: sbt "project payu-api" "test"
+    links:
+      - postgres-test:postgres
+    environment:
+      - SBT_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9999 -Dfile.encoding=UTF-8 -Xms512m -Xmx1536m -Xss2m -XX:ReservedCodeCacheSize=256m -XX:+TieredCompilation -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC
+
+  postgres-test:
+    image: postgres:9.6-alpine
+    environment:
+      - POSTGRES_DB=shorturl
+      - POSTGRES_USER=root
