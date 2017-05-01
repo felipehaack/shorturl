@@ -1,4 +1,4 @@
-package common
+package com.payu.shorturl
 
 import java.io.InputStream
 
