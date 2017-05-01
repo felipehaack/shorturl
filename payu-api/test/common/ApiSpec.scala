@@ -10,7 +10,7 @@ import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.db.Database
 import play.api.db.evolutions._
-import play.api.http.{Status => _, _}
+import play.api.http.{HeaderNames, HttpProtocol, HttpVerbs, MimeTypes, Status, Writeable, Status => _}
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.libs.json._
 import play.api.mvc._
@@ -85,7 +85,7 @@ trait DBSpec extends AppSpec {
 }
 
 sealed trait ApiHelpers extends Results
-  with HeaderNames with HttpVerbs
+  with HeaderNames with HttpVerbs with Status
   with MimeTypes with HttpProtocol with DefaultAwaitTimeout
   with Writeables with EssentialActionCaller with RouteInvokers
   with FutureAwaits
