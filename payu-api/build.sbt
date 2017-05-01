@@ -19,4 +19,9 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += filters
 
+javaOptions in Test ++= Seq(
+  "-Dconfig.resource=application-test.conf",
+  "-Dlogger.resource=logback-test.xml"
+)
+
 sourceGenerators in Compile += VersionGenerator.generate.taskValue
