@@ -4,7 +4,7 @@ CREATE SEQUENCE urls_id_seq START 1000;
 
 CREATE TABLE urls (
   id            INT8 DEFAULT nextval('urls_id_seq')     NOT NULL,
-  url           VARCHAR(300)                            NOT NULL,
+  url           VARCHAR(1024)                           NOT NULL,
   url_shortened VARCHAR(64),
   url_hashed    VARCHAR(255)                            NOT NULL,
   created       TIMESTAMP DEFAULT now()                 NOT NULL,
