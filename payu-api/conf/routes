@@ -3,6 +3,10 @@
 # ~~~~
 
 # App Api
-GET        /               api.AppApi.currentVersion
-GET        /version        api.AppApi.currentVersion
-GET        /ping           api.AppApi.ping
+GET         /                                 api.AppApi.currentVersion
+GET         /version                          api.AppApi.currentVersion
+GET         /ping                             api.AppApi.ping
+
+# ShortUrl Api
+GET         /v1/shorturl/:shortenedUrl        api.ShortUrlApi.get(shortenedUrl: String)
+POST        /v1/shorturl                      api.ShortUrlApi.create()
