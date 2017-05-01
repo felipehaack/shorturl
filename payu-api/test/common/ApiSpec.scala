@@ -4,13 +4,13 @@ import java.io.InputStream
 
 import akka.util.Timeout
 import com.google.inject.testing.fieldbinder.BoundFieldModule
-import org.scalatest._
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.mockito.MockitoSugar
+import org.scalatest.{BeforeAndAfterEach, Inspectors, Matchers, OptionValues, WordSpec}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.db.Database
-import play.api.db.evolutions._
-import play.api.http.{HeaderNames, HttpProtocol, HttpVerbs, MimeTypes, Status, Writeable, Status => _}
+import play.api.db.evolutions.{DatabaseEvolutions, DownScript, Evolution, ResourceEvolutionsReader, UpScript}
+import play.api.http.{HeaderNames, HttpProtocol, HttpVerbs, MimeTypes, Status, Writeable}
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.libs.json._
 import play.api.mvc._
