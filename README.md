@@ -16,7 +16,7 @@
 5. Once the docker application has been launched successfully, use the following curls:
 
 - POST: ```curl -H "Content-Type: application/json" -X POST -d '{"url": "http://www.payu.com"}' http://localhost:9000/v1/shorturl```
-- GET: ```curl -H "Content-Type: application/json" -X GET -d '{"url": "http://www.payu.com"}' http://localhost:9000/v1/shorturl/if```
+- GET: ```curl -H "Content-Type: application/json" -X GET  http://localhost:9000/v1/shorturl/if```
 
 ### How to Test
 
