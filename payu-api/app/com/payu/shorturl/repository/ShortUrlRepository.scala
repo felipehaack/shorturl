@@ -21,7 +21,7 @@ class ShortUrlRepository extends Sql {
   def find(urlId: UrlId)(implicit conn: Connection): Option[Url] = {
 
     val query = sql"""
-         SELECT * FROM urls WHERE id = ${urlId}
+         SELECT * FROM urls WHERE id = ${urlId} AND deleted IS NULL
        """
 
     query.asSingleOption[Url]
@@ -30,7 +30,7 @@ class ShortUrlRepository extends Sql {
   def findByUrl(url: String)(implicit conn: Connection): Option[Url] = {
 
     val query = sql"""
-         SELECT * FROM urls WHERE url = ${url}
+         SELECT * FROM urls WHERE url = ${url} AND deleted IS NULL
        """
 
     query.asSingleOption[Url]
@@ -39,7 +39,7 @@ class ShortUrlRepository extends Sql {
   def findByUrlShortened(urlShortened: String)(implicit conn: Connection): Option[Url] = {
 
     val query = sql"""
-         SELECT * FROM urls WHERE url_shortened = ${urlShortened}
+         SELECT * FROM urls WHERE url_shortened = ${urlShortened} AND deleted IS NULL
        """
 
     query.asSingleOption[Url]
@@ -48,7 +48,7 @@ class ShortUrlRepository extends Sql {
   def findByUrlHashed(urlHashed: String)(implicit conn: Connection): Option[Url] = {
 
     val query = sql"""
-         SELECT * FROM urls WHERE url_hashed = ${urlHashed}
+         SELECT * FROM urls WHERE url_hashed = ${urlHashed} AND deleted IS NULL
        """
 
     query.asSingleOption[Url]
