@@ -1,7 +1,7 @@
 package api
 
+import com.payu.shorturl.ApiSpec
 import com.payu.shorturl.model.Url
-import common.ApiSpec
 import play.api.libs.json.{JsObject, Json}
 
 class ShortUrlApiSpec extends ApiSpec {
